@@ -25,7 +25,6 @@ group :test do
   gem 'puppet-lint-version_comparison-check',                       :require => false
   gem 'puppet-lint-classes_and_types_beginning_with_digits-check',  :require => false
   gem 'puppet-lint-unquoted_string-check',                          :require => false
-  gem 'puppetlabs_spec_helper', '~> 2.2.0',                         :require => false
   gem 'puppet-lint-variable_contains_upcase',                       :require => false
 
   gem 'json_pure', '<= 2.0.1' if RUBY_VERSION < '2.0.0'
