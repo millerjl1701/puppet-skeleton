@@ -1,40 +1,41 @@
+## Thank you!
+
+Wanting a streamlined puppet skeleton for working on just Puppet 4 and beyond, I started using the excellent puppet-module-skeleton repository (https://github.com/garethr/puppet-module-skeleton) as a starting point. Hence me starting out with a huge and hearty thank you to Gareth and all the contributors to this prior. Before starting this, I looked at the new Puppet Development Kit (https://docs.puppet.com/pdk/latest/index.html) from Puppet which I think eventually replace this. However, it is currently just starting up. Perhaps, one day...
+
+Many of the changes in here as well came from standard practices used by the Vox Pupuli community (https://voxpupuli.org/ , https://github.com/voxpupuli/modulesync_config ) and their assorted already published modules.
+
+Another source of inspiration for files to change and add is the Puppet NTP module v.6.2.0 (https://github.com/puppetlabs/puppetlabs-ntp/)- the gold standard for Puppet's view of module development.
+
+
+## Introduction
+
 Puppet modules often take on the same file system structure. The
-built-in puppet-module tool makes starting modules easy, but the build
+built-in puppet-module tool makes starting modules easy, but the built
 in skeleton module is very simple. This skeleton is very opinionated.
 It's going to assume you're going to start out with tests (both unit and
 system), that you care about the puppet style guide, test using Travis,
 keep track of releases and structure your modules according to strong
 conventions.
 
-[![Build
-Status](https://travis-ci.org/garethr/puppet-module-skeleton.svg?branch=master)](https://travis-ci.org/garethr/puppet-module-skeleton)
-
 ## Installation
 
-As a feature, puppet module tool will use `~/.puppet/var/puppet-module/skeleton`
-(or `~/.puppetlabs/opt/puppet/cache/puppet-module/` for Puppet 4) as template for
-its `generate` command. The files provided here are meant to be better templates
-for use with the puppet module tool.
+As a feature, puppet module tool will use `~/.puppetlabs/opt/puppet/cache/puppet-module/` as template for its `generate` command. The files provided here are meant to be better templates for use with the puppet module tool.
+
+A note about development: I currently am using rvm to manage multiple Ruby environments (2.0.0, 2.1.10, 2.3.1, 2.4.1) on macOS 10.12. This may or may not work on your particular operating system or version of Ruby.
 
 ## Manual install
 
-As we don't want to have our .git files and this README in our skeleton, we export it like this : 
-
-### for puppet 3.x:
-
-    git clone https://github.com/garethr/puppet-module-skeleton
-    cd puppet-module-skeleton
-    find skeleton -type f | git checkout-index --stdin --force --prefix="$HOME/.puppet/var/puppet-module/" --
+As we don't want to have our .git files and this README in our skeleton, we export it like this :
 
 ### for puppet 4.x
 
-    git clone https://github.com/garethr/puppet-module-skeleton
-    cd puppet-module-skeleton
+    git clone https://github.com/millerjl1701/puppet-skeleton
+    cd puppet-skeleton
     find skeleton -type f | git checkout-index --stdin --force --prefix="$HOME/.puppetlabs/opt/puppet/cache/puppet-module/" --
 
 ## the install.sh
 
-I provided a script installing the skeleton in the right place depending on the detected puppet version
+There is an installation script that Gareth wrote and is still in the repository; however, I don't use it.
 
 ## Usage
 
@@ -45,10 +46,9 @@ Then just generate your new module structure like so:
 Once you have your module then install the development dependencies:
 
     cd user-module
-    bundle install
+    bundle install --path=.vendor --without system_tests
 
-Now you should have a bunch of rake commands to help with your module
-development:
+Now you should have a bunch of rake commands to help with your module development similar to the below list. There will likely be many more than these when the bundle command completes:
 
     bundle exec rake -T
     rake acceptance        # Run acceptance tests
