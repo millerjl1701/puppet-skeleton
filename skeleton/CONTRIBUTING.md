@@ -27,14 +27,13 @@ all managed by [Bundler](http://bundler.io/) according to the
 
 By default the tests use a baseline version of Puppet.
 
-If you have Ruby 2.x or want a specific version of Puppet,
-you must set an environment variable such as:
+If want a specific version of Puppet, you must set an environment variable such as:
 
-    export PUPPET_VERSION="~> 3.2.0"
+    export PUPPET_VERSION="~> 4.0"
 
 Install the dependencies like so...
 
-    bundle install
+    bundle install --path=.vendor --without system_tests
 
 ## Syntax and style
 
@@ -42,7 +41,9 @@ The test suite will run [Puppet Lint](http://puppet-lint.com/) and
 [Puppet Syntax](https://github.com/gds-operations/puppet-syntax) to
 check various syntax and style things. You can run these locally with:
 
+    bundle exec rake validate
     bundle exec rake lint
+    bundle exec rake metadata_lint
     bundle exec rake syntax
 
 ## Running the unit tests
@@ -82,9 +83,9 @@ Beaker tests with:
 This will use the host described in `spec/acceptance/nodeset/default.yml`
 by default. To run against another host, set the `BEAKER_set` environment
 variable to the name of a host described by a `.yml` file in the
-`nodeset` directory. For example, to run against CentOS 6.4:
+`nodeset` directory. For example, to run against CentOS 6.6:
 
-    BEAKER_set=centos-64-x64 bundle exec rake acceptance
+    BEAKER_set=centos-66-x64 bundle exec rake acceptance
 
 If you don't want to have to recreate the virtual machine every time you
 can use `BEAKER_destroy=no` and `BEAKER_provision=no`. On the first run you will
