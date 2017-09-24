@@ -11,7 +11,7 @@ def location_for(place, fake_version = nil)
 end
 
 group :test do
-  gem 'puppet', ENV['PUPPET_GEM_VERSION'] || '~> 4.0'
+  gem 'puppet', ENV['PUPPET_VERSION'] || '~> 4.0'
   gem 'semantic_puppet', '>= 1.0.0',                                :require => false
   gem 'puppetlabs_spec_helper', '~> 2.2.0',                         :require => false
   gem 'rspec-puppet', '~> 2.5',                                     :require => false
