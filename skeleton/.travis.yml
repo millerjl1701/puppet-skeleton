@@ -10,6 +10,7 @@ before_install:
   - gem --version
   - bundle -v
 script:
+  - bundle show puppet
   - bundle exec rake $CHECK
 matrix:
   fast_finish: true
