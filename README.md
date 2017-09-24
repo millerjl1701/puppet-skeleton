@@ -73,7 +73,7 @@ Of particular interst should be:
 * `rake syntax` - to check your have valid puppet and erb syntax
 * `rake metadata_lint` - to check your have a valid metadata.json file
 
-## Thanks
+## Gareth's Original: Thanks
 
 The trick used in the installation above, and a few other bits came from
 another excellent module skeleton from [spiette](https://github.com/spiette/puppet-module-skeleton).
