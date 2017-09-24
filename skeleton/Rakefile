@@ -9,12 +9,7 @@ require 'puppet-syntax/tasks/puppet-syntax'
 require 'metadata-json-lint/rake_task'
 require 'rubocop/rake_task'
 require 'puppet-strings/tasks'
-
-if Puppet.version.to_f >= 4.9
-    require 'semantic_puppet'
-elsif Puppet.version.to_f >= 3.6 && Puppet.version.to_f < 4.9
-    require 'puppet/vendor/semantic/lib/semantic'
-end
+require 'semantic_puppet'
 
 RuboCop::RakeTask.new
 
@@ -64,9 +59,9 @@ begin
   GitHubChangelogGenerator::RakeTask.new :changelog do |config|
     version = (Blacksmith::Modulefile.new).version
     config.future_release = "v#{version}" if version =~ /^\d+\.\d+.\d+$/
-    config.header = "# Changelog\n\nAll notable changes to this project will be documented in this file.\nEach new release typically also includes the latest modulesync defaults.\nThese should not affect the functionality of the module."
+    config.header = "# Changelog\n\nAll notable changes to this project will be documented in this file.\n"
     config.exclude_labels = %w{duplicate question invalid wontfix wont-fix modulesync skip-changelog}
-    config.user = 'voxpupuli'
+    config.user = 'millerjl1701'
   end
 rescue LoadError
 end

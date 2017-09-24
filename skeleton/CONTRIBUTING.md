@@ -31,9 +31,13 @@ If want a specific version of Puppet, you must set an environment variable such 
 
     export PUPPET_VERSION="~> 4.0"
 
-Install the dependencies like so...
+Install the gems needed to run basic tasks and spec tests:
 
-    bundle install --path=.vendor --without system_tests
+    bundle install --path=.vendor
+
+If you are doing beaker acceptance tests, then you need to use:
+
+    bundle install --path=.vendor --with system_tests development
 
 ## Syntax and style
 
