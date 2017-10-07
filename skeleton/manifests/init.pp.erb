@@ -1,24 +1,33 @@
 # Class: <%= metadata.name %>
 # ===========================
 #
-# Full description of class <%= metadata.name %> here.
+# Main class that includes all other classes for the <%= metadata.name %> module.
 #
-# Parameters
-# ----------
-#
-# * `sample parameter`
-#   Explanation of what this parameter affects and what it defaults to.
-#   e.g. "Specify one or more upstream ntp servers as an array."
+# @param package_ensure [String] Whether to install the <%= metadata.name %> package, and/or what version. Values: 'present', 'latest', or a specific version number. Default value: present.
+# @param package_name [String] Specifies the name of the package to install. Default value: '<%= metadata.name %>'.
+# @param service_enable [Boolean] Whether to enable the <%= metadata.name %> service at boot. Default value: true.
+# @param service_ensure [Enum['running', 'stopped']] Whether the <%= metadata.name %> service should be running. Default value: 'running'.
+# @param service_name [String] Specifies the name of the service to manage. Default value: '<%= metadata.name %>'.
 #
 class <%= metadata.name %> (
-  $package_name = $::<%= metadata.name %>::params::package_name,
-  $service_name = $::<%= metadata.name %>::params::service_name,
-) inherits ::<%= metadata.name %>::params {
+  String                     $package_ensure = 'present',
+  String                     $package_name   = '<%= metadata.name %>',
+  Boolean                    $service_enable = true,
+  Enum['running', 'stopped'] $service_ensure = 'running',
+  String                     $service_name   = '<%= metadata.name %>',
+  ) {
+  case $::operatingsystem {
+    'RedHat', 'CentOS': {
+      contain <%= metadata.name %>::install
+      contain <%= metadata.name %>::config
+      contain <%= metadata.name %>::service
 
-  # validate parameters here
-
-  class { '::<%= metadata.name %>::install': } ->
-  class { '::<%= metadata.name %>::config': } ~>
-  class { '::<%= metadata.name %>::service': } ->
-  Class['::<%= metadata.name %>']
+      Class['<%= metadata.name %>::install']
+      -> Class['<%= metadata.name %>::config']
+      ~> Class['<%= metadata.name %>::service']
+    }
+    default: {
+      fail("${::operatingsystem} not supported")
+    }
+  }
 }

@@ -1,13 +1,12 @@
-# == Class <%= metadata.name %>::service
+# @api private
 #
-# This class is meant to be called from <%= metadata.name %>.
-# It ensure the service is running.
+# This class is meant to be called from <%= metadata.name %> to manage the <%= metadata.name %> service.
 #
 class <%= metadata.name %>::service {
 
   service { $::<%= metadata.name %>::service_name:
-    ensure     => running,
-    enable     => true,
+    ensure     => $::<%= metadata.name %>::service_ensure,
+    enable     => $::<%= metadata.name %>::service_enable,
     hasstatus  => true,
     hasrestart => true,
   }

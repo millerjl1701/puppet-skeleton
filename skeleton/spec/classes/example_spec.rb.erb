@@ -8,16 +8,23 @@ describe '<%= metadata.name %>' do
           facts
         end
 
-        context "<%= metadata.name %> class without any parameters" do
+        context "<%= metadata.name %> class without any parameters changed from defaults" do
           it { is_expected.to compile.with_all_deps }
 
-          it { is_expected.to contain_class('<%= metadata.name %>::params') }
-          it { is_expected.to contain_class('<%= metadata.name %>::install').that_comes_before('Class[<%= metadata.name %>::config]') }
+          it { is_expected.to contain_class('<%= metadata.name %>::install') }
           it { is_expected.to contain_class('<%= metadata.name %>::config') }
+          it { is_expected.to contain_class('<%= metadata.name %>::service') }
+          it { is_expected.to contain_class('<%= metadata.name %>::install').that_comes_before('Class[<%= metadata.name %>::config]') }
           it { is_expected.to contain_class('<%= metadata.name %>::service').that_subscribes_to('Class[<%= metadata.name %>::config]') }
 
-          it { is_expected.to contain_service('<%= metadata.name %>') }
           it { is_expected.to contain_package('<%= metadata.name %>').with_ensure('present') }
+
+          it { is_expected.to contain_service('<%= metadata.name %>').with(
+            'ensure'     => 'running',
+            'enable'     => 'true',
+            'hasstatus'  => 'true',
+            'hasrestart' => 'true',
+          ) }
         end
       end
     end

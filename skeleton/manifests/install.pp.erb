@@ -1,10 +1,9 @@
-# == Class <%= metadata.name %>::install
+# @api private
 #
-# This class is called from <%= metadata.name %> for install.
+# This class is called from the main <%= metadata.name %> class for install.
 #
 class <%= metadata.name %>::install {
-
   package { $::<%= metadata.name %>::package_name:
-    ensure => present,
+    ensure => $::<%= metadata.name %>::package_ensure,
   }
 }
