@@ -1,3 +1,4 @@
+bin/
 .bundle/
 coverage/
 .dependencies/
@@ -11,6 +12,7 @@ Guardfile
 junit/
 .librarian/
 log/
+.metadata
 pkg/
 Puppetfile.lock
 .rspec_system/
