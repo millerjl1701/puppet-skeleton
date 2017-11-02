@@ -1,4 +1,7 @@
 ---
 
+<%= metadata.name %>::package_ensure: 'present'
 <%= metadata.name %>::package_name: '<%= metadata.name %>'
+<%= metadata.name %>::service_enable: true
+<%= metadata.name %>::service_ensure: 'running'
 <%= metadata.name %>::service_name: '<%= metadata.name %>'
