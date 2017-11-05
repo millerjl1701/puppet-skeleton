@@ -17,9 +17,6 @@ matrix:
   include:
     - rvm: 2.1.9
       bundler_args: --without system_tests development
-      env: PUPPET_VERSION="~> 4.0" CHECK=yaml_lint
-    - rvm: 2.1.9
-      bundler_args: --without system_tests development
       env: PUPPET_VERSION="~> 4.7.0" CHECK=test
     - rvm: 2.1.9
       bundler_args: --without system_tests development
