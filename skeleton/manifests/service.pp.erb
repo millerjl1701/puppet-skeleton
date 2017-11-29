@@ -3,6 +3,7 @@
 # This class is meant to be called from <%= metadata.name %> to manage the <%= metadata.name %> service.
 #
 class <%= metadata.name %>::service {
+  assert_private('<%= metadata.name %>::service is a private class')
 
   service { $::<%= metadata.name %>::service_name:
     ensure     => $::<%= metadata.name %>::service_ensure,
